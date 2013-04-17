@@ -127,7 +127,7 @@ UI: class {
         rootPass draw()
         display blit()
 
-        input _poll()
+        dye poll()
     }
 
     initEvents: func {

@@ -20,7 +20,7 @@ FlashMessages: class {
      
     pass: GlGroup
 
-    labelSprite: LabelSprite
+    labelSprite: GlSprite
 
     init: func (=ui) {
 	pass = GlGroup new()
@@ -30,13 +30,13 @@ FlashMessages: class {
 
 	rectSprite := GlRectangle new(500, 80)
         rectSprite pos set!(pos)
-	rectSprite color set!(0, 0, 0)
+	rectSprite color set!(0, 0, 0, )
 	rectSprite alpha = 0.7
 	pass add(rectSprite)
 
         labelSprite = GlText new(ui fontPath, "", 30)
         labelSprite pos set!(pos)
-        labelSprite color set!(0.9, 0.9, 0.5)
+        labelSprite color set!(230, 230, 128)
         counter = messageLength
 
         pass add(labelSprite)
