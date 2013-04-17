@@ -41,7 +41,7 @@ Boombox: class {
         // abide by the mute
         if (config mute) return
 
-        bleep playMusic(name, loops)
+        bleep playMusic("%s/%s.ogg" format(config musicPath, name), loops)
         currentMusic = name
     }
 
@@ -61,7 +61,7 @@ Boombox: class {
         if (samples contains?(name)) {
             samples get(name) play(loops)
         } else {
-            path := "%s/%s.wav" format(name)
+            path := "%s/%s.wav" format(config sfxPath, name)
             sample := bleep loadSample(path)
             if (sample) {
                 samples put(name, sample)

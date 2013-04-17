@@ -44,7 +44,9 @@ UI: class {
         title := config["title"]
 
         dye = DyeContext new(width, height, title, fullScreen)
+        dye setClearColor(Color new(0, 0, 0))
         dye setShowCursor(false)
+        dye add(rootPass)
 
         input = dye input
 
@@ -123,7 +125,7 @@ UI: class {
     update: func {
         flashMessages update()
 
-        dye draw()
+        dye render()
         dye poll()
     }
 

@@ -61,7 +61,7 @@ Box: class {
 	    if (depth < b depth) {
 		bangs = true
 		b depth = depth
-		(b dir x, b dir y) = ( 0, -1)
+		(b dir x, b dir y) = ( 0,  1)
 	    }
 	}
 
@@ -70,7 +70,7 @@ Box: class {
 	    if (depth < b depth) {
 		bangs = true
 		b depth = depth
-		(b dir x, b dir y) = ( 0,  1)
+		(b dir x, b dir y) = ( 0, -1)
 	    }
 	}
 
