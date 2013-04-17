@@ -50,8 +50,6 @@ UI: class {
         initEvents()
     }
 
-    bgMusic: Sample
-
     initSound: func {
         logger info("Initializing sound system")
         boombox = Boombox new()
@@ -119,7 +117,6 @@ UI: class {
     }
 
     update: func {
-        boombox update()
         flashMessages update()
 
         display clear()
