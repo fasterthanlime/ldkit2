@@ -1,15 +1,22 @@
 
-use gobject, cairo, sdl, deadlogger, ldkit
+// ours
+import ldkit/[Display, Input, Sprites, Sound, Engine, Pass, FlashMessages]
 
-// game deps
-import ldkit/[Display, Input, Math, Sprites, Sound, Engine]
-import Pass, FlashMessages
-
-// libs deps
+// third-party
+use deadlogger
 import deadlogger/Log
+
+use zombieconfig
 import zombieconfig
-import os/Time
+
+use dye
+import dye/[math]
+
+use sdl
 import sdl/Core
+
+// sdk
+import os/Time
 
 UI: class {
 
@@ -140,6 +147,5 @@ UI: class {
     }
 
 }
-
 
 

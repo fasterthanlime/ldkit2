@@ -1,15 +1,32 @@
 
-use gobject, cairo, sdl, deadlogger
+// third-party
 
-// libs deps
-import deadlogger/Log
-import cairo/[Cairo] 
-import structs/[ArrayList]
-import zombieconfig
-import sdl/[Core, Event]
+/* ************************
+ * BEGIN - TODO GET RID OF
+ *************************/
+use gobject
 import gobject
 
-import ldkit/Math
+use cairo
+import cairo/[Cairo] 
+
+use sdl
+import sdl/[Core, Event]
+/* ************************
+ * END - TODO GET RID OF
+ *************************/
+
+use deadlogger
+import deadlogger/Log
+
+use zombieconfig
+import zombieconfig
+
+use dye
+import dye/[math]
+
+// sdk
+import structs/[ArrayList]
 
 Display: class {
 
