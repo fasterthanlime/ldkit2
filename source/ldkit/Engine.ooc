@@ -1,11 +1,13 @@
 
-import UI, Timing, Actor
-
-import structs/[ArrayList]
-import sdl/Core
-
+// third-party
 use zombieconfig
 import zombieconfig
+
+// sdk
+import structs/[ArrayList]
+
+// ours
+import UI, Timing, Actor
 
 Engine: class {
 
@@ -68,7 +70,7 @@ Engine: class {
     }
 
     quit: func {
-	SDL quit()
+	ui dye quit()
 	exit(0)
     }
 

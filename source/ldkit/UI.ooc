@@ -81,12 +81,12 @@ UI: class {
         // offset to make the hand correspond with the actual mouse
         cursorImage := GlSprite new("assets/png/cursor.png") 
         cursorImage pos set!(-12, -10)
-        cursor = GroupSprite new()
+        cursor = GlGroup new()
         cursor add(cursorImage)
 
         mousePass add(cursor)
 
-        input onMouseMove(||
+        input onMouseMove(|mm|
             cursor pos set!(input mousepos)
         )
 
@@ -123,10 +123,7 @@ UI: class {
     update: func {
         flashMessages update()
 
-        dye clear()
-        rootPass draw()
-        display blit()
-
+        dye draw()
         dye poll()
     }
 
@@ -134,7 +131,7 @@ UI: class {
         // it's a better practice to turn on debug locally
         //input debug = true
 
-	input onKeyPress(Keys ESC, ||
+	input onKeyPress(KeyCode ESC, |kp|
 	    if (escQuits) engine quit()
 	)
 

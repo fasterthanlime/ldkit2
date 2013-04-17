@@ -4,7 +4,7 @@ import ldkit/[UI]
 
 // third-party
 use dye
-import dye/[core, math, sprite, primitives]
+import dye/[core, math, sprite, primitives, text]
 
 // sdk
 import structs/[Stack]
@@ -20,7 +20,7 @@ FlashMessages: class {
      
     pass: GlGroup
 
-    labelSprite: GlSprite
+    labelSprite: GlText
 
     init: func (=ui) {
 	pass = GlGroup new()
@@ -28,10 +28,10 @@ FlashMessages: class {
 
 	pos := vec2(ui dye center x, ui dye height - 40)
 
-	rectSprite := GlRectangle new(500, 80)
+	rectSprite := GlRectangle new(vec2(500, 80))
         rectSprite pos set!(pos)
-	rectSprite color set!(0, 0, 0, )
-	rectSprite alpha = 0.7
+	rectSprite color set!(0, 0, 0)
+	rectSprite opacity = 0.7
 	pass add(rectSprite)
 
         labelSprite = GlText new(ui fontPath, "", 30)

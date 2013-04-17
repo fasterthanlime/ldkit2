@@ -1,7 +1,6 @@
 
-use sdl
-
-import sdl/Core
+use sdl2
+import sdl2/Core
 
 LTime: class {
 
