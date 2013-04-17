@@ -1,5 +1,7 @@
 
-import ldkit/[Math]
+// third-party
+use dye
+import dye/[math]
 
 // A box - pos is the top-left corner
 // Y+ is down, X+ is right

@@ -1,7 +1,13 @@
 
-import structs/[Stack]
+// internal
+import ldkit/[UI]
 
-import ldkit/[UI, Sprites, Math, Pass]
+// third-party
+use dye
+import dye/[core, math, sprite, primitives]
+
+// sdk
+import structs/[Stack]
 
 FlashMessages: class {
 
@@ -12,29 +18,28 @@ FlashMessages: class {
     messageLength := 90
     counter := 0
      
-    pass: Pass
+    pass: GlGroup
 
     labelSprite: LabelSprite
 
     init: func (=ui) {
-	pass = Pass new(ui, "flash")
-	ui statusPass addPass(pass)
+	pass = GlGroup new()
+	ui statusPass add(pass)
 
-	pos := vec2(ui display getCenter() x, ui display getHeight() - 40)
+	pos := vec2(ui dye center x, ui dye height - 40)
 
-	rectSprite := RectSprite new(pos)
+	rectSprite := GlRectangle new(500, 80)
+        rectSprite pos set!(pos)
 	rectSprite color set!(0, 0, 0)
 	rectSprite alpha = 0.7
-	rectSprite size set!(500, 80)
-	pass addSprite(rectSprite)
+	pass add(rectSprite)
 
-        labelSprite = LabelSprite new(pos, "")
+        labelSprite = GlText new(ui fontPath, "", 30)
+        labelSprite pos set!(pos)
         labelSprite color set!(0.9, 0.9, 0.5)
-        labelSprite fontSize = 30.0
-        labelSprite centered = true
         counter = messageLength
 
-        pass addSprite(labelSprite)
+        pass add(labelSprite)
     }
 
     reset: func {
@@ -44,11 +49,11 @@ FlashMessages: class {
     }
 
     show: func {
-	pass enabled = true
+	pass visible = true
     }
 
     hide: func {
-	pass enabled = false
+	pass visible = false
     }
 
     push: func (msg: String) {
@@ -63,7 +68,7 @@ FlashMessages: class {
             counter += 1
         } else {
             if (!messages empty?()) {
-                labelSprite setText(messages pop())
+                labelSprite value = messages pop()
 		show()
                 counter = 0
             } else {

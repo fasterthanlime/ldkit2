@@ -1,6 +1,6 @@
 
 // ours
-import ldkit/[Display, Sprites, Sound, Engine, Pass, FlashMessages]
+import ldkit/[Sound, Engine, FlashMessages]
 
 // third-party
 use deadlogger
@@ -10,15 +10,11 @@ use zombieconfig
 import zombieconfig
 
 use dye
-import dye/[math, input]
-
-use sdl
-import sdl/Core
-
-// sdk
-import os/Time
+import dye/[core, math, input, sprite]
 
 UI: class {
+
+    fontPath := "assets/ttf/font.ttf"
 
     // note to viewers: 'This' refers to the current class in ooc.
     logger := static Log getLogger(This name)
@@ -47,10 +43,10 @@ UI: class {
         fullScreen := (config["fullScreen"] == "true")
         title := config["title"]
 
-        dye = Display new(width, height, title, fullScreen)
-        dye hideCursor()
+        dye = DyeContext new(width, height, title, fullScreen)
+        dye setShowCursor(false)
 
-        input = SdlInput new()
+        input = dye input
 
         initSound()
         initPasses()
@@ -83,11 +79,12 @@ UI: class {
         flashMessages = FlashMessages new(this)
 
         // offset to make the hand correspond with the actual mouse
-        cursorImage := ImageSprite new(vec2(-12, -10), "assets/png/cursor.png") 
+        cursorImage := GlSprite new("assets/png/cursor.png") 
+        cursorImage pos set!(-12, -10)
         cursor = GroupSprite new()
         cursor add(cursorImage)
 
-        mousePass addSprite(cursor)
+        mousePass add(cursor)
 
         input onMouseMove(||
             cursor pos set!(input mousepos)
@@ -99,24 +96,24 @@ UI: class {
     reset: func {
         // flashMessages reset()
 
-        rootPass reset()
+        rootPass clear()
 
         // nothing to reset
-        rootPass addPass(bgPass)
+        rootPass add(bgPass)
 
         // everything will be re-created when loading the level
-        levelPass reset()
-        rootPass addPass(levelPass)
+        levelPass clear()
+        rootPass add(levelPass)
 
         // close all windows
-        hudPass reset()
-        rootPass addPass(hudPass)
+        hudPass clear()
+        rootPass add(hudPass)
 
         // status is just a few text fields, no need to recreate
-        rootPass addPass(statusPass)
+        rootPass add(statusPass)
 
         // no need to recreate either
-        rootPass addPass(mousePass)
+        rootPass add(mousePass)
     }
 
     flash: func (msg: String) {
@@ -126,7 +123,7 @@ UI: class {
     update: func {
         flashMessages update()
 
-        display clear()
+        dye clear()
         rootPass draw()
         display blit()
 
