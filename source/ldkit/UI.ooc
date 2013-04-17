@@ -1,6 +1,6 @@
 
 // ours
-import ldkit/[Display, Input, Sprites, Sound, Engine, Pass, FlashMessages]
+import ldkit/[Display, Sprites, Sound, Engine, Pass, FlashMessages]
 
 // third-party
 use deadlogger
@@ -10,7 +10,7 @@ use zombieconfig
 import zombieconfig
 
 use dye
-import dye/[math]
+import dye/[math, input]
 
 use sdl
 import sdl/Core
@@ -23,8 +23,8 @@ UI: class {
     // note to viewers: 'This' refers to the current class in ooc.
     logger := static Log getLogger(This name)
 
-    // something we can draw on using Cairo
-    display: Display
+    // our dye context
+    dye: DyeContext
 
     // something we can read events from
     input: Input
@@ -47,10 +47,10 @@ UI: class {
         fullScreen := (config["fullScreen"] == "true")
         title := config["title"]
 
-        display = Display new(width, height, fullScreen, title)
-        display hideCursor()
+        dye = Display new(width, height, title, fullScreen)
+        dye hideCursor()
 
-        input = Input new()
+        input = SdlInput new()
 
         initSound()
         initPasses()
@@ -63,19 +63,19 @@ UI: class {
     }
 
     // different UI passes
-    rootPass := Pass new(this, "root")
+    rootPass := GlGroup new()
 
     // name passes for later profiling
-    bgPass := Pass new(this, "bg") // clear
-    levelPass := Pass new(this, "level") // level terrain etc.
-    hudPass := Pass new(this, "hud")  // human interface (windows/dialogs etc.)
+    bgPass := GlGroup new() // clear
+    levelPass := GlGroup new() // level terrain etc.
+    hudPass := GlGroup new()  // human interface (windows/dialogs etc.)
 
     // status pass
-    statusPass := Pass new(this, "status")
+    statusPass := GlGroup new()
 
     // mouse pass (cursor)
-    mousePass := Pass new(this, "mouse")
-    cursor: GroupSprite
+    mousePass := GlGroup new()
+    cursor: GlGroup
 
     flashMessages: FlashMessages
 
