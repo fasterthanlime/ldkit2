@@ -15,7 +15,7 @@ Engine: class {
 
     actors := ArrayList<Actor> new()
 
-    FPS := 30.0 // let's target 30FPS
+    FPS := 60.0
 
     slomo := false
 
@@ -25,7 +25,7 @@ Engine: class {
 
     run: func {
         ticks: Int
-        delta := 1000.0 / FPS // try 30FPS
+        delta := 1000.0 / FPS
 
         // main loop
         while (true) {
