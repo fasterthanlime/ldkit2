@@ -20,7 +20,7 @@ FlashMessages: class {
 	pass = Pass new(ui, "flash")
 	ui statusPass addPass(pass)
 
-	pos := vec2(ui display getCenter() x, (ui display getHeight() - 40) as Float)
+	pos := vec2(ui display getCenter() x, ui display getHeight() - 40)
 
 	rectSprite := RectSprite new(pos)
 	rectSprite color set!(0, 0, 0)
