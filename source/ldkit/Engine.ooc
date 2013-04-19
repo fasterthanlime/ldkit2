@@ -7,7 +7,7 @@ import zombieconfig
 import structs/[ArrayList]
 
 // ours
-import UI, Timing, Actor
+import UI, Actor
 
 Engine: class {
 
@@ -39,7 +39,7 @@ Engine: class {
 	actors remove(actor)
     }
 
-    onTick: func (f: Func (Float)) {
+    onTick: func (f: Func) {
 	actors add(ActorClosure new(f))
     }
 

@@ -15,14 +15,14 @@ Actor: class {
 
 ActorClosure: class extends Actor {
 
-    f: Func (Float)
+    f: Func
 
     init: func (=f) {
 
     }
 
-    update: func (delta: Float) -> Bool {
-	f(delta)
+    update: func -> Bool {
+	f()
     }
 
 }

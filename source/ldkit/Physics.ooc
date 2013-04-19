@@ -2,14 +2,20 @@
 use chipmunk
 import chipmunk
 
+use gnaar
+import gnaar/[utils]
+
 import ldkit/[Actor]
 
 PhysicsActor: class extends Actor {
 
     body: CpBody
     shape: CpShape
+    rotateConstraint: CpConstraint
 
     space: CpSpace
+
+    pos: Vec2
 
     init: func (=space) {
         
@@ -18,7 +24,7 @@ PhysicsActor: class extends Actor {
     createBody: func (mass, moment: Float) {
         body = CpBody new(mass, moment)
         body setPos(cpv(pos))
-        level space addBody(body)
+        space addBody(body)
     }
 
     createCircle: func (radius: Float, mass: Float) {
@@ -45,28 +51,28 @@ PhysicsActor: class extends Actor {
 
     setShape: func (.shape) {
         if (this shape) {
-            level space removeShape(this shape)
+            space removeShape(this shape)
             this shape free()
         }
 
         this shape = shape
         shape setUserData(this)
-        level space addShape(shape)
+        space addShape(shape)
     }
 
     createConstraint: func {
-        rotateConstraint = CpRotaryLimitJoint new(body, level space getStaticBody(), 0, 0)
-        level space addConstraint(rotateConstraint)
+        rotateConstraint = CpRotaryLimitJoint new(body, space getStaticBody(), 0, 0)
+        space addConstraint(rotateConstraint)
     }
 
     destroy: func {
-        level space removeShape(shape)
+        space removeShape(shape)
         shape free()
 
-        level space removeConstraint(rotateConstraint)
+        space removeConstraint(rotateConstraint)
         rotateConstraint free()
 
-        level space removeBody(body)
+        space removeBody(body)
         body free()
     }
 
