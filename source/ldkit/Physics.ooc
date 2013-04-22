@@ -93,7 +93,7 @@ HandlerPool: class {
 
     setupCollisions: func (space: CpSpace, typeA: Int32, f: Func (HalfHandler)) {
         if (space != cachedSpace) {
-            handlers clear()
+            clear()
             cachedSpace = space
         }
 
@@ -104,6 +104,10 @@ HandlerPool: class {
         }
 
         f(halfHandler)
+    }
+
+    clear: func {
+        handlers clear()
     }
 
     _hash: func (a, b: Int32) -> Int64 {
