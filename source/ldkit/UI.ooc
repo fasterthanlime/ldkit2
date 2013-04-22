@@ -124,9 +124,6 @@ UI: class {
 
     update: func {
         flashMessages update()
-
-        dye render()
-        dye poll()
     }
 
     initEvents: func {
