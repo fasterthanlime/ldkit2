@@ -2,4 +2,4 @@ Name: ldkit2
 Version: 2.0
 Description: Ludum Dare survival kit, 2nd edition
 SourcePath: source
-Requires: dye, bleep
+Requires: dye, bleep, chipmunk
